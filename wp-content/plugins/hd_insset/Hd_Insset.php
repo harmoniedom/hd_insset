@@ -28,6 +28,12 @@ foreach (glob(Hd_Insset_DIR .'/classes/*/*.php') as $filename)
         if (!@require_once $filename)
             throw new Exception(sprintf(__('Failed to include %s'), $filename));
 
+
+register_activation_hook(Hd_Insset_FILE, function() {
+    $Hd_Insset_Install = new Hd_Insset_Install();
+    $Hd_Insset_Install->setup();
+});
+
 if (is_admin())
     new Hd_Insset_Admin();
 else

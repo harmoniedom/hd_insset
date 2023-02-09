@@ -43,16 +43,16 @@ class Hd_Insset_Admin {
     
     public function Hd_Insset_Admin() {
 
-        $Hd_Insset_Views_Config = new Hd_Insset_Views_Config();
-        return $Hd_Insset_Views_Config->display();
+        // $Hd_Insset_Views_Config = new Hd_Insset_Views_Config();
+        // return $Hd_Insset_Views_Config->display();
       
 
     }
 
     public function Hd_Insset_Views_Liste_Pays() {
 
-        $Hd_Insset_Views_Liste_Pays = new Hd_Insset_Views_Liste_Pays();
-        return $Hd_Insset_Views_Liste_Pays->display();
+        // $Hd_Insset_Views_Liste_Pays = new Hd_Insset_Views_Liste_Pays();
+        // return $Hd_Insset_Views_Liste_Pays->display();
     
 
     }
