@@ -295,14 +295,6 @@ class Hd_Insset_Install
             'ZMB'=>'Zambia',
             'ZWE'=>'Zimbabwe'
         );
-
-        $Hd_Insset_Crud_Index = new Hd_Insset_Crud_Index();
-
-        //inserer les pays
-        // foreach ( $iso_array as $key => $value)
-        // {
-        //     $Hd_Insset_Crud_Index->ajouter_pays( $key, $value ); 
-        // }
             
         }
         
