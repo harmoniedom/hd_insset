@@ -23,11 +23,6 @@ class Hd_Insset_Install
         $charset_collate = $wpdb->get_charset_collate();
         $table_name_Pays = $wpdb->prefix . 'hd_insset_pays';
 
-        if ( $this->tableAlreadyExists(  $table_name_Pays ) ) {
-
-            $wpdb->query( "DROP TABLE IF EXISTS  $table_name_Pays" );
-
-        }
         
         //si table existe
         if ( !$this->tableAlreadyExists( $table_name_Pays ) )
@@ -295,6 +290,16 @@ class Hd_Insset_Install
             'ZMB'=>'Zambia',
             'ZWE'=>'Zimbabwe'
         );
+
+        $Hd_Insset_Crud_Index = new Hd_Insset_Crud_Index();
+
+        //boucle pour ajouter les pays 
+        foreach ( $iso_array as $key => $value)
+        {
+            $Hd_Insset_Crud_Index->ajouter_Pays( $key, $value );
+        }
+           
+
             
         }
         
@@ -310,5 +315,6 @@ class Hd_Insset_Install
     
         }
 
+      
 
 }
