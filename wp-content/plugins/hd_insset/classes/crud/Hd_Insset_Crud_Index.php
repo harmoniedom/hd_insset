@@ -21,7 +21,19 @@ class Hd_Insset_Crud_Index
         );
 
         return $succes;
+    
 
+    }
+
+    public function get_list_pays()
+    {
+        global $wpdb;
+
+        $table_name_Pays = $wpdb->prefix . "hd_insset_pays";
+
+        $sql="select * from $table_name_Pays";
+        $result = $wpdb->get_results($sql, "ARRAY_A");
+        return $result;
     }
 
 }
