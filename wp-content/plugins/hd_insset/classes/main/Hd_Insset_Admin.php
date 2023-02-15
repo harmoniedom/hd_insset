@@ -15,45 +15,66 @@ class Hd_Insset_Admin {
             __('VOYAGE'),
             __('VOYAGE'),
             'administrator',
-            'Hd_Insset_Admin',
-            array($this, 'Hd_Insset_Admin'),
-            'images/marker.png',
+            'Hd_Insset_Param',
+            array($this, 'Hd_Insset_Param'),
             1000
         );
 
         add_submenu_page(
-            'Hd_Insset_Admin',
+            'Hd_Insset_param',
             __('VOYAGE/ Config'),
             __('Configuration'),
             'administrator',
-            'iHd_Insset_Admin',
-            array($this, 'Hd_Insset_Admin')
+            'Hd_Insset_Config',
+            array($this, 'Hd_Insset_Config')
         );
 
         add_submenu_page(
-            'Hd_Insset_Admin',
-            __('VOYAGE / Liste'),
-            __('Liste'),
+            'Hd_Insset_Param',
+            __('VOYAGE / Liste Pays'),
+            __('Liste Pays'),
             'administrator',
             'Hd_Insset_Views_Liste_Pays',
             array($this, 'Hd_Insset_Views_Liste_Pays')
         );
+
+        add_submenu_page(
+            'Hd_Insset_Param',
+            __('VOYAGE / Liste Prospects'),
+            __('Liste Prospects'),
+            'administrator',
+            'Hd_Insset_Views_Liste_Prospects',
+            array($this, 'Hd_Insset_Views_Liste_Prospects')
+        );
+
+       
     }
     
     
     
-    public function Hd_Insset_Admin() {
-
-        
-      
-
+    public function Hd_Insset_Param() 
+    {
+        return;
     }
 
-    public function Hd_Insset_Views_Liste_Pays() {
+    public function Hd_Insset_Views_Liste_Pays() 
+    {
 
         $Hd_Insset_Views_Liste_Pays = new Hd_Insset_Views_Liste_Pays();
-        $Hd_Insset_Views_Liste_Pays->display();
+        return $Hd_Insset_Views_Liste_Pays->display();
 
+    }
+
+    public function Hd_Insset_Config()
+    {
+        $Hd_Insset_Views_Config = new Hd_Insset_Views_Config();
+        return $Hd_Insset_Views_Config->display();
+    }
+
+    public function Hd_Insset_Views_Liste_Prospects()
+    {
+        // $Hd_Insset_Views_Liste_Prospects = new Hd_Insset_Views_Liste_Prospects();
+        // return $Hd_Insset_Views_Liste_Prospects->display();
     }
 
 }

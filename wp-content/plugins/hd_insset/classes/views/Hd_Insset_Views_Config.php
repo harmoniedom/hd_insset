@@ -1,6 +1,7 @@
 <?php
 
-class Hd_Insset_Views_Config {
-
+class Hd_Insset_Views_Config 
+{
+   
 }
 

@@ -147,6 +147,17 @@ class Hd_Insset_List extends WP_List_Table {
         return $html;
     }
 
+    private function getAccessible($id = 0, $accessible = 0)
+    {
+        if (!$id)
+            return;
+
+        if ($accessible)
+            printf("<input data-id=$id type='checkbox' name='accessible' checked class='accessible_checkBox'>");
+        else
+            printf("<input data-id=$id type='checkbox' name='accessible' class='accessible_checkBox'>");
+    }
+
     private function getDelete($id=0) {
 
         if (!$id)
