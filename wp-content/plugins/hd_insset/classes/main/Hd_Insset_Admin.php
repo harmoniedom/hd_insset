@@ -2,18 +2,17 @@
 
 class Hd_Insset_Admin {
 
-    public function __construct() {
-
+    public function __construct()
+ {
         add_action('admin_menu', array($this, 'menu'), -1);
         return;
-
     }
 
     public function menu() {
 
         add_menu_page(
-            __('VOYAGE'),
-            __('VOYAGE'),
+            'Hd_Insset',
+            'Hd_Insset',
             'administrator',
             'Hd_Insset_Param',
             array($this, 'Hd_Insset_Param'),
@@ -21,9 +20,9 @@ class Hd_Insset_Admin {
         );
 
         add_submenu_page(
-            'Hd_Insset_param',
-            __('VOYAGE/ Config'),
-            __('Configuration'),
+            'Hd_Insset_Param',
+            __('Hd_Insset / Config'),
+            __('Config'),
             'administrator',
             'Hd_Insset_Config',
             array($this, 'Hd_Insset_Config')
@@ -31,33 +30,34 @@ class Hd_Insset_Admin {
 
         add_submenu_page(
             'Hd_Insset_Param',
-            __('VOYAGE / Liste Pays'),
-            __('Liste Pays'),
+            __('Hd_Insset / Liste Pays'),
+            __('List Pays'),
             'administrator',
-            'Hd_Insset_Views_Liste_Pays',
-            array($this, 'Hd_Insset_Views_Liste_Pays')
+            'Hd_Insset_Liste_Pays',
+            array($this, 'Hd_Insset_Liste_Pays')
         );
 
         add_submenu_page(
             'Hd_Insset_Param',
-            __('VOYAGE / Liste Prospects'),
+            __('Hd_Insset / Liste Prospects'),
             __('Liste Prospects'),
             'administrator',
-            'Hd_Insset_Views_Liste_Prospects',
-            array($this, 'Hd_Insset_Views_Liste_Prospects')
+            'Hd_Insset_Liste_Prospects',
+            array($this, 'Hd_Insset_Liste_Prospects')
         );
+       
 
+add_action('admin_enqueue_scripts', array($this, 'assets'), 999);
        
     }
-    
-    
+
     
     public function Hd_Insset_Param() 
     {
         return;
     }
 
-    public function Hd_Insset_Views_Liste_Pays() 
+    public function Hd_Insset_Liste_Pays() 
     {
 
         $Hd_Insset_Views_Liste_Pays = new Hd_Insset_Views_Liste_Pays();
@@ -71,10 +71,29 @@ class Hd_Insset_Admin {
         return $Hd_Insset_Views_Config->display();
     }
 
-    public function Hd_Insset_Views_Liste_Prospects()
+    public function Hd_Insset_Liste_Prospects()
     {
-        // $Hd_Insset_Views_Liste_Prospects = new Hd_Insset_Views_Liste_Prospects();
-        // return $Hd_Insset_Views_Liste_Prospects->display();
+        $Hd_Insset_Views_Liste_Prospects = new Hd_Insset_Views_Liste_Prospects();
+        return $Hd_Insset_Views_Liste_Prospects->display();
     }
 
+    public function assets(){
+
+        wp_enqueue_style ('admin-front', plugins_url(Hd_Insset_PLUGIN_NAME .'/assets/css/admin.css'));
+    
+        //Ajouter les scripts necessaires
+        wp_register_script('hd_inssetA', plugins_url(Hd_Insset_PLUGIN_NAME .'/assets/js/Hd_Insset_Admin.js', Hd_Insset_VERSION, true));
+        wp_enqueue_script('hd_inssetA');
+            
+        //Point sécurité
+        wp_localize_script('hd_inssetA', 'hd_insset_script', array(
+        'security' => wp_create_nonce('ajax_nonce_security')
+            
+        ));
+            return;
+    
+    }
+
+
+     
 }

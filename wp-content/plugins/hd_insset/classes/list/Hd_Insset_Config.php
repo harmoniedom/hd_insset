@@ -5,10 +5,8 @@ if (!class_exists('WP_List_Table')) {
     require_once(ABSPATH .'wp-admin/includes/class-wp-list-table.php');
 }
 
-class Hd_Insset_List extends WP_List_Table {
+class Hd_Insset_Config extends WP_List_Table {
 
-    public $_tablename = 'hd_insset_pays';
-    public $_program;
     public $_screen;
 
     public function __construct($program = NULL) {
@@ -50,28 +48,33 @@ class Hd_Insset_List extends WP_List_Table {
 
     public function get_columns($columns = array()) {
 
-        $columns['iso'] = __('iso');
-        $columns['pays'] = __('pays');
-        $columns['note'] = __('note');
-        $columns['accessible'] = __('majeurs');
-        $columns['actif'] = __('actif');
+        // $columns['iso'] = __('iso');
+        // $columns['pays'] = __('pays');
+        // $columns['note'] = __('note');
+        // $columns['accessible'] = __('accessible');
+        // $columns['actif'] = __('actif');
 
         
             global $wpdb;
-            $data = $wpdb->prefix . $this->_tableName;
+           // $data = $wpdb->prefix . $this->_tableName;
+           
 
-          $sql = "SELECT DISTINCT valeur FROM `$data` WHERE valeur <> '';";
-        
+            $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'" . $wpdb->prefix . "hd_insset_config" . "'";
+          
+
             $result = $wpdb->get_results($sql, 'ARRAY_A');
         
-            foreach ($result as $col) {
-                $columns[$col['valeur']] = __($col['valeur']);
-            }
+
+            foreach ($result as $value)
+            if ($value["COLUMN_NAME"] != "id" && $value["COLUMN_NAME"] != "actif")
+                $columns[$value["COLUMN_NAME"]] = __($value["COLUMN_NAME"]);
+
             $columns['delete'] = __('delete');
             return $columns;
         
         }
-
+    
+  
     public function get_hidden_columns($default = array()) {
 
         return $default;
@@ -80,19 +83,20 @@ class Hd_Insset_List extends WP_List_Table {
 
     public function get_sortable_columns($sortable = array()) {
     global $wpdb;
+   $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME =N'hd_insset_config'";
+   
+   $result = $wpdb->get_results($sql, 'ARRAY_A');
 
-    $sql = "SELECT DISTINCT `valeur` FROM " . $wpdb->prefix . 'hd_insset_pays' . " WHERE `valeur` != ''";
 
-    $result = $wpdb->get_results($sql, 'ARRAY_A');
 
     foreach ($result as $value)
-        $sortable[$value["Valeur"]] = array($value["valeur"], true);
-
-    $sortable["iso"] = array('iso', true);
-    $sortable["pays"] = array('pays', true);
-    $sortable["note"] = array('note', true);
-    $sortable["accessible"] = array('accessible', true);
-    $sortable["actif"] = array('actif', true);
+    $sortable[$value["COLUMN_NAME"]] = array($value["COLUMN_NAME"], true);
+    
+    // $sortable["iso"] = array('iso', true);
+    // $sortable["pays"] = array('pays', true);
+    // $sortable["note"] = array('note', true);
+    // $sortable["accessible"] = array('accessible', true);
+    // $sortable["actif"] = array('actif', true);
     return $sortable;
 
     }
@@ -101,7 +105,8 @@ class Hd_Insset_List extends WP_List_Table {
 
         global $wpdb;
 
-            $sql = "SELECT * FROM " . $wpdb->prefix . $this->_tableName;
+            $sql = "SELECT * FROM `" . $wpdb->prefix . "hd_insset_config" . "`";
+            
             
             
 
@@ -123,28 +128,29 @@ class Hd_Insset_List extends WP_List_Table {
             return self::getDelete($item['iso']);
 
         
-        if(preg_match('/accessible/i',$column_name))
-            return sprintf( '<input type="checkbox" name="accessible" id="%s" %s>', $item['iso'], $item['accessible'] == 1 ? 'checked' : '' );
+         if (preg_match('/accessible/i', $column_name))
+            return self::get_majeur($item['id'], $item['accessible']);
 
-        if(preg_match('/note/i',$column_name))
-            return sprintf( '<select name="note" id="%s" class="note">%s</select>', $item['iso'], $this->getNote($item['note']) );
+        if (preg_match('/note/i', $column_name))
+            return self::get_note($item['id'], $item['note']);
 
         return @$item[$column_name];
 
     }
 
-    private function getNote($note){
-        $note = (int)$notation;
-        $note = $note > 5 ? 5 : $note;
-        $note = $note < 1 ? 1 : $note;
-        $note = $note == 0 ? 1 : $note;
+    private function getNote($id = 0, $note = 0)
+    {
+        if (!$id)
+            return;
 
-        $html = '';
-        for($i = 1; $i <= 5; $i++){
-            $html .= sprintf( '<option value="%d" %s>%d</option>', $i, $note== $i ? 'selected' : '', $i );
+        printf("<select data-id=$id class='select-note' name='note'>");
+        for ($i = 0; $i <= 5; $i++) {
+            if ($note == $i)
+                printf("<option value='$i' selected>$i</option>");
+            else
+                printf("<option value='$i'>$i</option>");
         }
-
-        return $html;
+        printf("</select>");
     }
 
     private function getAccessible($id = 0, $accessible = 0)

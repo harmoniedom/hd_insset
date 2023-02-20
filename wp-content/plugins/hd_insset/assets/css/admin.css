@@ -1,33 +1,14 @@
+.notice-info {
+  display: none;
+}
 
-@font-face {
-    font-family: 'FontAwesome';
-    font-style: normal;
-    font-weight: 400;
-    font-display: block;
-    src: url("../font/fa-regular-400.woff2") format("woff2"), url("../font/fa-regular-400.ttf") format("truetype"); }
-    
-  @font-face {
-    font-family: 'FontAwesome';
-    font-style: normal;
-    font-weight: 900;
-    font-display: block;
-    src: url("../font/fa-solid-900.woff2") format("woff2"), url("../font/fa-solid-900.ttf") format("truetype"); }
-  
-  @font-face {
-    font-family: 'FontAwesomeBrands';
-    font-display: block;
-    font-weight: 400;
-    src: url("../font/fa-brands-400.woff2") format("woff2"), url("../font/fa-brands-400.ttf") format("truetype"); }
+.ft_grid_disable_row {
+  background-color: rgb(211, 211, 211) !important;
+  opacity: 0.4 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+}
 
-.deleteButton:before {
-			font-family: 'FontAwesome';
-			font-weight: 900;
-			content: '\f1f8'; /* valeur unicode */
-            color: red;
-		}
-
-.hide{
-    display : none;
-    }
-    
-    
+#ft-pays-multiselect {
+  height: 300px !important;
+}
