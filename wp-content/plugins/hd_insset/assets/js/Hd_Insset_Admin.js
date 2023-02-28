@@ -1,7 +1,7 @@
 jQuery(document).ready(function () {
 
 //wp_ajax_hd_insset_actif' -> actif
-jQuery("#Hd-submitPaysConfig").click(function (e) 
+jQuery('#Hd-submitPaysConfig').click(function (e) 
 {
     e.stopPropagation();
     e.preventDefault();

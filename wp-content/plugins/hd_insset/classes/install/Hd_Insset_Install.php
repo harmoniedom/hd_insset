@@ -24,8 +24,10 @@ class Hd_Insset_Install
         $table_name_prospects = $wpdb->prefix . 'hd_insset_prospects';
         $table_name_pays = $wpdb->prefix . 'hd_insset_pays';
 
-if ($this->isTableBaseAlreadyCreated($table_name_config, $table_name_prospects, $table_name_pays))
-   {    
+        if ($this->isTableBaseAlreadyCreated($table_name_config, $table_name_prospects, $table_name_pays))
+            {    
+                return;
+            }
 
         $sql_create_hd_insset_config = "CREATE TABLE IF NOT EXISTS $table_name_config (
 	     `id` mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -39,15 +41,16 @@ if ($this->isTableBaseAlreadyCreated($table_name_config, $table_name_prospects, 
 
           if (dbDelta( $sql_create_hd_insset_config ) )
           {
+           //appel de fonction creerPays Hd_Insset_Install.php
            $this->creerPays($table_name_config);
 
             $sql_create_hd_insset_prospects = "CREATE TABLE IF NOT EXISTS $table_name_prospects (
-                `id ` mediumint(9) NOT NULL AUTO_INCREMENT,
-                `nom ` VARCHAR(255) NOT NULL,
-                `prenom ` VARCHAR(255) NOT NULL,
-                `sexe ` VARCHAR(255) NOT NULL,
-                `email ` VARCHAR(255) NOT NULL,
-                `date_naissance ` DATETIME NOT NULL,
+                `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+                `nom` VARCHAR(255) NOT NULL,
+                `prenom` VARCHAR(255) NOT NULL,
+                `sexe` VARCHAR(255) NOT NULL,
+                `email` VARCHAR(255) NOT NULL,
+                `date_naissance` DATETIME NOT NULL,
                 PRIMARY KEY (id)
             ) $charset_collate;";
 
@@ -55,32 +58,33 @@ if ($this->isTableBaseAlreadyCreated($table_name_config, $table_name_prospects, 
             {
 
                 $sql_create_hd_insset_pays = "CREATE TABLE IF NOT EXISTS $table_name_pays (
-                    `id_prospects ` mediumint(9) NOT NULL,
-                    `id_config ` varchar(3) NOT NULL,
-                    FOREIGN KEY (id_prospects) REFERENCES $table_name_prospects(id_prospects),
-                    FOREIGN KEY (id_config) REFERENCES $table_name_config(id_config)
+                    `id_prospects` mediumint(9) NOT NULL,
+                    `id_config` mediumint(9) NOT NULL,
+                    FOREIGN KEY (`id_prospects`) REFERENCES `$table_name_prospects`(`id`),
+                    FOREIGN KEY (`id_config`) REFERENCES `$table_name_config`(`id`)
                 ) $charset_collate;";
-   return;
-                }
+                dbDelta( $sql_create_hd_insset_pays );
+                return;
+            }
 
          }
-            }
+    }
     
-          }
+          
 
 
-
-public function isTableBaseAlreadyCreated($table_name_config, $table_name_prospects, $table_name_pays)
+        
+    public function isTableBaseAlreadyCreated($table_name_config, $table_name_prospects, $table_name_pays)
     {
         global $wpdb;
 
         $sql_Config = 'SHOW TABLES LIKE \'%' . $table_name_config . '%\'';
-       $sql_Prospects = 'SHOW TABLES LIKE \'%' . $table_name_prospects . '%\'';
+        $sql_Prospects = 'SHOW TABLES LIKE \'%' . $table_name_prospects . '%\'';
         $sql_Pays = 'SHOW TABLES LIKE \'%' . $table_name_pays . '%\'';
 
       return $wpdb->get_var($sql_Config) && $wpdb->get_var($sql_Prospects) && $wpdb->get_var($sql_Pays);
     } 
-   // }
+   
         public function creerPays($table_name_config)
         {
             global $wpdb;

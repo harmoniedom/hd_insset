@@ -33,11 +33,11 @@ class Hd_Insset_Liste_Prospects extends WP_List_Table {
 
         $perPage = 10;
         $this->set_pagination_args(array(
-            'total_items' => count($data),
+           // 'total_items' => count($data),
             'per_page'    => $perPage
         ));
 
-        $data = array_slice($data, (($currentPage - 1) * $perPage), $perPage);
+       // $data = array_slice($data, (($currentPage - 1) * $perPage), $perPage);
 
         $this->items = $data;
     }
@@ -61,21 +61,21 @@ class Hd_Insset_Liste_Prospects extends WP_List_Table {
         return $sortable;
     }
 
-    public function table_data($per_page = 10, $page_number = 1, $orderbydefault = false)
-    {
-        global $wpdb;
+    // public function table_data($per_page = 10, $page_number = 1, $orderbydefault = false)
+    // {
+    //     global $wpdb;
 
-        $sql = "SELECT COUNT( * ) as 'numero_pays', hd_insset_prospects.* FROM hd_insset_pays INNER JOIN hd_insset_prospects on hd_insset_pays.id_prospects = hd_insset_prospects.id GROUP BY hd_insset_prospects.id ";
+    //    // $sql = "SELECT COUNT( * ) as 'numero_pays', hd_insset_prospects.* FROM hd_insset_pays INNER JOIN hd_insset_prospects on hd_insset_pays.id_prospects = hd_insset_prospects.id GROUP BY hd_insset_prospects.id ";
         
-        if (!empty($_REQUEST['orderby'])) {
-            $sql .= ' ORDER BY `' . esc_sql($_REQUEST['orderby']) . '`';
-            $sql .= !empty($_REQUEST['order']) ? ' ' . esc_sql($_REQUEST['order']) : ' ASC';
-        }
+    //     if (!empty($_REQUEST['orderby'])) {
+    //         $sql .= ' ORDER BY `' . esc_sql($_REQUEST['orderby']) . '`';
+    //         $sql .= !empty($_REQUEST['order']) ? ' ' . esc_sql($_REQUEST['order']) : ' ASC';
+    //     }
 
-        $result = $wpdb->get_results($sql, 'ARRAY_A');
+    //     $result = $wpdb->get_results($sql, 'ARRAY_A');
 
-        return $result;
-    }
+    //     return $result;
+    // }
 
     public function column_default($item, $column_name)
     {

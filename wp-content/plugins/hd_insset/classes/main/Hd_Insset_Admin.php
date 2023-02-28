@@ -79,7 +79,7 @@ add_action('admin_enqueue_scripts', array($this, 'assets'), 999);
 
     public function assets(){
 
-        wp_enqueue_style ('admin-front', plugins_url(Hd_Insset_PLUGIN_NAME .'/assets/css/admin.css'));
+        wp_enqueue_style ('admin-front', plugins_url(Hd_Insset_PLUGIN_NAME .'/assets/css/Hd_Insset_Admin.css'));
     
         //Ajouter les scripts necessaires
         wp_register_script('hd_inssetA', plugins_url(Hd_Insset_PLUGIN_NAME .'/assets/js/Hd_Insset_Admin.js', Hd_Insset_VERSION, true));

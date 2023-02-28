@@ -16,7 +16,7 @@ class Hd_Insset_Admin_Actions_Index
             $$key = (string) trim($value);
 
         $Hd_Insset_Crud_Index = new Hd_Insset_Crud_Index();
-        $response = $Hd_Insset_Crud_Index->Pays_Accessible($id, $majeur);
+        $response = $Hd_Insset_Crud_Index->Update_Accessible($id, $majeur);
 
         print $response;
 
@@ -34,7 +34,7 @@ class Hd_Insset_Admin_Actions_Index
             $$key = (string) trim($value);
 
         $Hd_Insset_Crud_Index= new Hd_Insset_Crud_Index();
-        $response = $Hd_Insset_Crud_Index->Pays_Note($id, $note);
+        $response = $Hd_Insset_Crud_Index->Update_Note($id, $note);
 
         print $response;
 
@@ -52,7 +52,7 @@ class Hd_Insset_Admin_Actions_Index
             $$key = $value;
 
         $Hd_Insset_Crud_Index= new Hd_Insset_Crud_Index();
-        $response = $Hd_Insset_Crud_Index->Pays_Actif($changer);
+        $response = $Hd_Insset_Crud_Index->Update_Actif($changer);
 
         print $response;
 

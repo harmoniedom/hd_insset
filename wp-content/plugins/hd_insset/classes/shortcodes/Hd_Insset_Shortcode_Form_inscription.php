@@ -1,12 +1,34 @@
 <?php
 
-add_shortcode('FORMULAIRE_INSCRIPTION', array('Hd_Insset_Shortcode_Form', 'display'));
+add_shortcode('FORMULAIRE_INSCRIPTION', array('Hd_Insset_Shortcode_Form_inscription', 'display'));
 
-class Hd_Insset_Shortcode_Form
+//classe pour faire un formulaire d'inscription
+class Hd_Insset_Shortcode_Form_inscription
 {
 
     static function display($atts)
     {
+
+        $Hd_Insset_Crud_Index = new Hd_Insset_Crud_Index();
+        
+        //récupèrer la valeur du résultat grace au crud pour le mettre dans la variable Liste Pays
+        $id_prospects = '1';
+        $ListePays = $Hd_Insset_Crud_Index->getConfig();
+
+         // regarder si l'utilisateur a déja des choix de pays
+         if (sizeof($ListePays) != 0) 
+         {
+            $paysDonnee = "[['Country'],";
+
+            foreach ($ListePays as $Liste) :
+                $paysDonnee .= "['" . $Liste['pays'] . "'],";
+            endforeach;
+
+            $paysDonnee = substr($paysDonnee, 0, -1);
+            $paysDonnee .= "]";
+        }
+
+        //fomulaire en html pour s'inscrire
         return " <form id='hd-form-inscription'>
             <fieldset>
                 <legend>Vos informations</legend>
@@ -42,7 +64,7 @@ class Hd_Insset_Shortcode_Form
                 </div>
 
             </fieldset>
-            <button id='ft-submit-button-inscription'>Suivant</button>
+            <button id='hd-submit-button-inscription'>Suivant</button>
         </form>";
     }
 }

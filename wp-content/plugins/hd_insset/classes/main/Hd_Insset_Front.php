@@ -9,8 +9,10 @@ class Hd_Insset_Front {
             return;
         }
     
+        //fonction ajouter js créer au dessus
         public function addjs()
         {
+            
             wp_register_script('hd_inssetF', plugins_url(Hd_Insset_PLUGIN_NAME . '/assets/js/Hd_Insset_Front.js'), array('jquery-new'), Hd_Insset_VERSION, true);
             wp_enqueue_script('hd_inssetF');
             wp_localize_script(
@@ -21,7 +23,7 @@ class Hd_Insset_Front {
                     'security' => wp_create_nonce('ajax_nonce_security')
                 )
             );
-    
+            wp_enqueue_style ('admin-front', plugins_url(Hd_Insset_PLUGIN_NAME .'/assets/css/Hd_Insset_Admin.css'));
             return;
         }
     }

@@ -69,7 +69,7 @@ class Hd_Insset_Config extends WP_List_Table {
             if ($value["COLUMN_NAME"] != "id" && $value["COLUMN_NAME"] != "actif")
                 $columns[$value["COLUMN_NAME"]] = __($value["COLUMN_NAME"]);
 
-            $columns['delete'] = __('delete');
+           
             return $columns;
         
         }
@@ -123,56 +123,48 @@ class Hd_Insset_Config extends WP_List_Table {
 
     public function column_default( $item, $column_name ) {
 
-        //supprimer
-        if (preg_match('/delete/i',$column_name))
-            return self::getDelete($item['iso']);
-
         
          if (preg_match('/accessible/i', $column_name))
-            return self::get_majeur($item['id'], $item['accessible']);
+            return self::getAccessible($item['id']);
 
         if (preg_match('/note/i', $column_name))
-            return self::get_note($item['id'], $item['note']);
+            return self::getNote($item['id']);
 
         return @$item[$column_name];
 
     }
 
-    private function getNote($id = 0, $note = 0)
+    private function getNote($id = 0)
     {
+    
         if (!$id)
-            return;
+        return;
 
-        printf("<select data-id=$id class='select-note' name='note'>");
-        for ($i = 0; $i <= 5; $i++) {
-            if ($note == $i)
-                printf("<option value='$i' selected>$i</option>");
-            else
-                printf("<option value='$i'>$i</option>");
-        }
-        printf("</select>");
+        return  sprintf(
+            '<select name="note" id="note">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>',
+            $id,
+            __('note')
+        );
     }
 
     private function getAccessible($id = 0, $accessible = 0)
     {
-        if (!$id)
-            return;
-
-        if ($accessible)
-            printf("<input data-id=$id type='checkbox' name='accessible' checked class='accessible_checkBox'>");
-        else
-            printf("<input data-id=$id type='checkbox' name='accessible' class='accessible_checkBox'>");
-    }
-
-    private function getDelete($id=0) {
 
         if (!$id)
-            return;
+        return;
 
-        return  sprintf(
-            '<button data-id="%d" class="button button-secondary deleteButton"> %s </button>',
+    return  sprintf(
+        '<input type="checkbox" id="accessible" name="accessible">',
+      
             $id,
-            __(''));
+            __('accessible')
+        );
     }
-
 }
