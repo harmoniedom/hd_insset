@@ -141,7 +141,7 @@ class Hd_Insset_Config extends WP_List_Table {
         return;
 
         return  sprintf(
-            '<select name="note" id="note">
+            '<select name="note" class="select-note" data-id="%s">
                             <option value="0">0</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -161,7 +161,7 @@ class Hd_Insset_Config extends WP_List_Table {
         return;
 
     return  sprintf(
-        '<input type="checkbox" id="accessible" name="accessible">',
+        '<input type="checkbox" class="acessible_checkBox" name="accessible" data-id="%s">',
       
             $id,
             __('accessible')

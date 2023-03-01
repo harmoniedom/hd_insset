@@ -30,7 +30,7 @@ jQuery(".select-note").change(function (e) {
   const datas = {
     action: "hd_insset_note",
     security: hd_insset_script.security,
-    iso: jQuery(this).data("id"),
+    id: jQuery(this).data("id"),
     note: jQuery(this).val(),
   };
 
@@ -53,14 +53,14 @@ jQuery(document).ready(function () {
       datas = {
         action: "hd_insset_accessible",
         security: hd_insset_script.security,
-        iso: jQuery(this).data("id"),
+        id: jQuery(this).data("id"),
         majeur: 1,
       };
     else
       datas = {
         action: "hd_insset_accessible",
         security: hd_insset_script.security,
-        iso: jQuery(this).data("id"),
+        id: jQuery(this).data("id"),
         majeur: 0,
       };
 

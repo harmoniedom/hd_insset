@@ -57,13 +57,15 @@ jQuery(document).ready(function () {
     e.preventDefault();
 
     let formData = new FormData();
-    formData.append("action", "");
+    formData.append("action", "hd_inssetselect_pays");
     formData.append("security", hd_insset_script.security);
 
     jQuery('#hd_insset_pays_selectionnes').find('input, select').each(function (i) {
         let id = jQuery(this).attr("id");
         if (typeof id !== "undefined") formData.append(id, jQuery(this).val());
       });
+
+      console.log(formData);
 
     jQuery('#hd-loading-container').show();
 

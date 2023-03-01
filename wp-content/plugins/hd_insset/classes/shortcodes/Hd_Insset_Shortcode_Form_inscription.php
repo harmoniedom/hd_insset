@@ -46,7 +46,7 @@ class Hd_Insset_Shortcode_Form_inscription
                 <div>
                     <label for='sexe'>Entrer votre sexe:</label>
 
-                    <select name='sexe' id='sexe' required='required'>
+                    <select name='sexe' id='sexe' required='required' style='display: block;'>
                         <option value='Homme'>Homme</option>
                         <option value='Femme'>Femme</option>
                     </select>

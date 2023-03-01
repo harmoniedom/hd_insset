@@ -27,28 +27,28 @@ class Hd_Insset_Shortcode_Form_selection
         
         <div>
             <label >Selectionné votre pays</label>
-            <select name='pays1' id='hd_insset_pays1' required='required'>
+            <select name='pays1' id='hd_insset_pays1' required='required'  style='display: block;'>
             <option > Veuillez sélectionner un pays </option>" . $paysListe . "
             </select>
         </div>
 
         <div class='disable-select-pays' id='pays2_container'>
             <label >Selectionné votre pays</label>
-            <select name='pays2' id='hd_insset_pays2' >
+            <select name='pays2' id='hd_insset_pays2'  style='display: block;'>
             <option> Veuillez sélectionner un pays </option> " . $paysListe . "
             </select>
         </div>
 
         <div class='disable-select-pays' id='pays3_container'>
             <label>Selectionné votre pays</label>
-            <select name='pays3' id='hd_insset_pays3' >
+            <select name='pays3' id='hd_insset_pays3'  style='display: block;'>
             <option >Veuillez sélectionner un pays</option> " . $paysListe . "
             </select>
         </div>
 
         <div class='disable-select-pays' id='pays4_container'>
             <label> Selectionné votre pays</label>
-            <select name='pays4' id='hd_insset_pays4' >
+            <select name='pays4' id='hd_insset_pays4'  style='display: block;'>
             <option> Veuillez sélectionner un pays  </option> " . $paysListe . "
            </select>
         </div>

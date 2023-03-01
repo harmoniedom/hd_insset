@@ -16,7 +16,7 @@ remove_action('wp_head', 'wp_generator');
 if (!defined('ABSPATH'))
     exit;
 
-define('Hd_Insset_VERSION', '1.0.2');
+define('Hd_Insset_VERSION', '1.0.16');
 define('Hd_Insset_FILE',__FILE__);
 define('Hd_Insset_DIR', dirname(Hd_Insset_FILE));
 define('Hd_Insset_BASENAME', pathinfo((Hd_Insset_FILE))['filename']);

@@ -68,33 +68,33 @@ class Hd_Insset_Crud_Index
         $sqlAge = "SELECT * FROM $table_name_prospects WHERE `id`=1";
         $prospect = $wpdb->get_results($sqlAge, 'ARRAY_A');
 
+        var_dump($prospect);
+        $Naissance = $prospect['0']['date_naissance'];
+        $aujourdhui = date("Y-m-d");
+        $dateDiff = date_diff(date_create($Naissance), date_create($aujourdhui));
+         $age = $dateDiff->format('%y');
 
-        // // $Naissance = $prospect['0']['date_naissance'];
-        // // $aujourdhui = date("Y-m-d");
-        // // $dateDiff = date_diff(date_create($Naissance), date_create($aujourdhui));
-        //  $age = $dateDiff->format('%y');
+        if ($age >= 18) {
+            // le prospect est majeur
+            $table_name_config = $wpdb->prefix .'hd_insset_config';
 
-        // if ($age >= 18) {
-        //     // le prospect est majeur
-        //     $table_name_config = $wpdb->prefix .'hd_insset_config';
+            $sql = "SELECT * FROM $table_name_config WHERE `actif`=1";
 
-        //     $sql = "SELECT * FROM $table_name_config WHERE `actif`=1";
+            return $wpdb->get_results($sql, 'ARRAY_A');
 
-        //     return $wpdb->get_results($sql, 'ARRAY_A');
+        } else {
 
-        // } else {
+            // le prospect est mineur
+            $table_name_config = $wpdb->prefix .'hd_insset_config';
 
-        //     // le prospect est mineur
-        //     $table_name_config = $wpdb->prefix .'hd_insset_config';
+            $sql = "SELECT * FROM $table_name_config WHERE `actif`=1 AND `accessible`=0";
 
-        //     $sql = "SELECT * FROM $table_name_config WHERE `actif`=1 AND `accessible`=0";
-
-        //     return $wpdb->get_results($sql, 'ARRAY_A');
-        // }
+            return $wpdb->get_results($sql, 'ARRAY_A');
+        }
     }
 
      //appel de fonction dans Hd_Insset_Admin_Actions_Index.php
-    static function Upadate_Actif($changer)
+    static function Update_Actif($changer)
     {
         global $wpdb;
         $table_name_config = $wpdb->prefix . 'hd_insset_config';
@@ -113,19 +113,19 @@ class Hd_Insset_Crud_Index
     }
 
     //appel de fonction dans Hd_Insset_Admin_Actions_Index.php
-    public function Upadate_Accessible($id, $value)
+    public function Update_Accessible($id, $value)
     {
         global $wpdb;
 
         $table_name_config = $wpdb->prefix . 'hd_insset_config';
 
         //ajout de la valeur
-        if ($wpdb->update($table_name_config, array('majeur' => $value), array('id' => $id)))
+        if ($wpdb->update($table_name_config, array('accessible' => $value), array('id' => $id)))
             return "update ok";
     }
 
     //appel de fonction dans Hd_Insset_Admin_Actions_Index.php
-    public function Upadate_Note($id, $value)
+    public function Update_Note($id, $value)
     {
         global $wpdb;
 
@@ -133,6 +133,17 @@ class Hd_Insset_Crud_Index
 
         //ajout de la valeur
         if ($wpdb->update($table_name_config, array('note' => $value), array('id' => $id)))
+            return "update ok";
+    }
+
+    public function insert($value)
+    {
+        global $wpdb;
+
+        $table_name_pays = $wpdb->prefix . 'hd_insset_pays';
+
+        //ajout de la valeur
+        if ($wpdb->insert($table_name_pays, array('id_prospects' => 1, 'id_config' => $value)))// id 1 et id du pays
             return "update ok";
     }
 

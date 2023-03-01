@@ -16,7 +16,7 @@ class Hd_Insset_Admin_Actions_Index
             $$key = (string) trim($value);
 
         $Hd_Insset_Crud_Index = new Hd_Insset_Crud_Index();
-        $response = $Hd_Insset_Crud_Index->Update_Accessible($id, $majeur);
+        $response = $Hd_Insset_Crud_Index->Update_Accessible($_REQUEST['id'], $_REQUEST['majeur']);
 
         print $response;
 
@@ -29,12 +29,12 @@ class Hd_Insset_Admin_Actions_Index
 
         if ((!isset($_REQUEST)) || sizeof(@$_REQUEST) < 1)
             exit;
-
+        var_dump($_REQUEST);
         foreach ($_REQUEST as $key => $value)
             $$key = (string) trim($value);
 
         $Hd_Insset_Crud_Index= new Hd_Insset_Crud_Index();
-        $response = $Hd_Insset_Crud_Index->Update_Note($id, $note);
+        $response = $Hd_Insset_Crud_Index->Update_Note($_REQUEST['id'], $_REQUEST['note']);
 
         print $response;
 
@@ -48,6 +48,7 @@ class Hd_Insset_Admin_Actions_Index
         if ((!isset($_REQUEST)) || sizeof(@$_REQUEST) < 1)
             exit;
 
+            //var_dump($_REQUEST);
         foreach ($_REQUEST as $key => $value)
             $$key = $value;
 
