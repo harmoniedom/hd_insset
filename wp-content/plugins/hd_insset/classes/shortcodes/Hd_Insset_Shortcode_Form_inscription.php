@@ -15,21 +15,24 @@ class Hd_Insset_Shortcode_Form_inscription
         $id_prospects = '1';
         $ListePays = $Hd_Insset_Crud_Index->getConfig();
 
+
          // regarder si l'utilisateur a déja des choix de pays
          if (sizeof($ListePays) != 0) 
          {
-            $paysDonnee = "[['Country'],";
+            $paysDonnee = "[['pays'],";
 
             foreach ($ListePays as $Liste) :
                 $paysDonnee .= "['" . $Liste['pays'] . "'],";
             endforeach;
 
             $paysDonnee = substr($paysDonnee, 0, -1);
-            $paysDonnee .= "]";
-        }
+            $paysDonnee .= "]"; 
+            
+        
+    }
 
         //fomulaire en html pour s'inscrire
-        return " <form id='hd-form-inscription'>
+        return  " <form id='hd-form-inscription'>
             <fieldset>
                 <legend>Vos informations</legend>
                 

@@ -21,6 +21,9 @@ define('Hd_Insset_FILE',__FILE__);
 define('Hd_Insset_DIR', dirname(Hd_Insset_FILE));
 define('Hd_Insset_BASENAME', pathinfo((Hd_Insset_FILE))['filename']);
 define('Hd_Insset_PLUGIN_NAME', Hd_Insset_BASENAME);
+define('Hd_Insset_Url_1', '/choix-voyage');
+define('Hd_Insset_Url_2', '/hd_insset');
+//define('Hd_Insset_Url_3', '/choix-voyage-final');
 
 
 foreach (glob(Hd_Insset_DIR .'/classes/*/*.php') as $filename)

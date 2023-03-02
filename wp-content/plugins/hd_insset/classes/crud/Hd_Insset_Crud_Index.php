@@ -146,5 +146,20 @@ class Hd_Insset_Crud_Index
         if ($wpdb->insert($table_name_pays, array('id_prospects' => 1, 'id_config' => $value)))// id 1 et id du pays
             return "update ok";
     }
+    
+    public function getFinal($prospectId)
+    {
+        global $wpdb;
+        $table_name_pays = $wpdb->prefix . 'hd_insset_pays';
+        $table_name_prospects = $wpdb->prefix . 'hd_insset_prospects';
+
+        $sqlPays = "SELECT * FROM $table_name_pays WHERE `id_prospects`=$prospectId";
+        $sqlProspect = "SELECT * FROM $table_name_prospects WHERE `id`=$prospectId";
+
+        $paysId =  $wpdb->get_results($sqlPays, 'ARRAY_A');
+        $ProspectId =  $wpdb->get_results($sqlProspect, 'ARRAY_A');
+
+    return array( $paysId, $ProspectId);
+    }
 
 }

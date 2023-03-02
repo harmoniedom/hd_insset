@@ -44,7 +44,7 @@ class Hd_Insset_Liste_Prospects extends WP_List_Table {
 
     public function get_columns($columns = array())
     {
-        $columns['prospects'] = __('Prospect information');
+        $columns['prospects'] = __('Utilisateur');
         $columns['pays'] = __('Nombre de pays selectionné');
 
         return $columns;

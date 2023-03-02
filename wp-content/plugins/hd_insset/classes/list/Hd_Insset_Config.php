@@ -167,4 +167,12 @@ class Hd_Insset_Config extends WP_List_Table {
             __('accessible')
         );
     }
+    // ajoue d'un style pour les pays indisponible 
+    public function single_row($item)
+    {
+        $cssClass = ($item['actif'] == 1) ? '' : 'hd_grid_disable_row';
+        echo '<tr class="' . $cssClass . '">';
+        $this->single_row_columns($item);
+        echo '</tr>';
+    }
 }
