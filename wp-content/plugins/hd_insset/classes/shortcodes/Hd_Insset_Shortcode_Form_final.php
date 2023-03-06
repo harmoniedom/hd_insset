@@ -12,17 +12,19 @@ class Hd_Insset_Shortcode_Form_final
         
         //récupèrer la valeur du résultat grace au crud pour le mettre dans la variable Liste Pays
         $ListePays = $Hd_Insset_Crud_Index->getFinal(1);
-        //var_dump($ListePays[0][0]);
+        // var_dump($ListePays[0]);
 
         $paysHTML = "";
         
-        foreach ($ListePays[0][0] as $Liste=>$key) :
-            $Paysinfo =  $key ;
-            var_dump($key);
+        foreach ($ListePays[0] as $Liste=>$key) :
+
+            $helper = new Hd_Insset_Helper();
+            $paysHTML .= "<li> " . $helper->conversion_pays($key['id_config']) . "</li>";
+            // $Paysinfo .= $key['id_config'] ;
+            // var_dump($helper->conversion_pays($key['id_config']));
         endforeach;
 
         return "
-            $Paysinfo;
             nom = " .$ListePays[1][0]["nom"]. ",<br>
             prenom = " .$ListePays[1][0]["prenom"].",<br>
             sexe= " .$ListePays[1][0]["sexe"].",<br>
@@ -31,9 +33,9 @@ class Hd_Insset_Shortcode_Form_final
             
 
             <ul class='hd_pays_list_container'>
-            " . $paysHTML . "
+            " . $paysHTML. "
             </ul>
-            <button id='hd-form-final'>Oui, je valide mes choix</button>
+            <button id='hd-form-final'>Oui, je suis d'accord</button>
             <div id='handlebarsModalBox'></div>
             ";
     }

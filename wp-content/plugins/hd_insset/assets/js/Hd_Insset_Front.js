@@ -74,6 +74,10 @@ jQuery(document).ready(function ()
 
     jQuery('#hd-loading-container').show();
 
+    const source = jQuery("#hd-form-final").attr(
+      "src"
+    );
+
     jQuery.ajax(
       {
       url: hd_insset_script.ajax_url,
@@ -86,13 +90,15 @@ jQuery(document).ready(function ()
       processData: false,
       data: formData,
       type: "post",
-      success: function (rs, textStatus, jqXHR) {
-         //update authorisation sessionStorage value
+      url: source,
+      success: function (rs, textStatus, jqXHR,source) {
+        jQuery("#hd-form-final").html(template(context));
+       
+        jQuery("#hd-form-final").addClass("show-modal-box");
       //aller à la page suivante 
-      // window.sessionStorage.setItem("Authorisation", "step1,step2");
-      // window.location.replace("http://localhost/wordpress/2023/02/28/choix-de-voyage/");
-      //        "hd_insset",
-      //      "choix-voyage-final");
+      window.sessionStorage.setItem("Authorisation", "step1,step2,step3");
+      window.location.replace("http://localhost/wordpress/2023/03/01/final/");
+     
           return false;
        
         },

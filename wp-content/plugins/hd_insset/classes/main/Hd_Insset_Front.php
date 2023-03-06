@@ -24,6 +24,8 @@ class Hd_Insset_Front {
                 )
             );
             wp_enqueue_style ('admin-front', plugins_url(Hd_Insset_PLUGIN_NAME .'/assets/css/Hd_Insset_Admin.css'));
+            wp_enqueue_script('hd-form-final', plugins_url(Hd_Insset_PLUGIN_NAME) . '/assets/handlebars/Hd_Insset_Handlebars.hbs', array(), Hd_Insset_VERSION, true);
+          
             return;
         }
     }
