@@ -28,11 +28,35 @@ class Hd_Insset_Shortcode_Form_inscription
             $paysDonnee = substr($paysDonnee, 0, -1);
             $paysDonnee .= "]"; 
             
+            $mapHTML = "
+            <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
+            <script type='text/javascript'>
+                google.charts.load('current', {
+                'packages':['geochart'],
+                });
+                google.charts.setOnLoadCallback(drawRegionsMap);
         
+                function drawRegionsMap() {
+                var data = google.visualization.arrayToDataTable(" . $paysDonnee . ");
+        
+                var options = {};
+        
+                var chart = new google.visualization.GeoChart(document.getElementById('hd-pays-map'));
+        
+                chart.draw(data, options);
+                }
+            </script>
+                
+            <h1>Vos pays choisit : </h1>
+            <div class='map-container'>
+                <div id='hd-pays-map' style='width: 900px; height: 500px;'></div>
+                <button id='reinitialisation-boutton'>Réinitialiser mes choix </button>
+            </div>
+        ";
     }
 
         //fomulaire en html pour s'inscrire
-        return  " <form id='hd-form-inscription'>
+        return  $mapHTML . " <form id='hd-form-inscription'>
             <fieldset>
                 <legend>Vos informations</legend>
                 

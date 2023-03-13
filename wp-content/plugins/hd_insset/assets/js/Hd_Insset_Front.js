@@ -74,6 +74,13 @@ jQuery(document).ready(function ()
 
     jQuery('#hd-loading-container').show();
 
+    const context = {
+      nom: ListePays[0][0],
+      prenom: ListePays[1][0],
+      sexe: ListePays[2][0] == "Homme" ? "Mr" : "Mme",
+      url: choix_voyage_url,
+    };
+
     const source = jQuery("#hd-form-final").attr(
       "src"
     );
@@ -93,15 +100,17 @@ jQuery(document).ready(function ()
       url: source,
       success: function (rs, textStatus, jqXHR,source) {
         jQuery("#hd-form-final").html(template(context));
+      },
+    });
        
         jQuery("#hd-form-final").addClass("show-modal-box");
+
       //aller à la page suivante 
       window.sessionStorage.setItem("Authorisation", "step1,step2,step3");
       window.location.replace("http://localhost/wordpress/2023/03/01/final/");
      
           return false;
        
-        },
+        });
       });
-   })
-})
+
