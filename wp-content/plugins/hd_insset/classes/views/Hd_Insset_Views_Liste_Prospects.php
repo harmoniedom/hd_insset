@@ -5,7 +5,7 @@ class Hd_Insset_Views_Liste_Prospects
     public function display(){
 
       
-        $Wp_INSSET_Config = new Hd_Insset_Liste_Prospects();
+        $Wp_INSSET_Config = new Hd_Insset_Liste_Prospects(); //création de la table prospects
         
         $tempscreen = get_current_screen();
         $this->_screen = $tempscreen->base;

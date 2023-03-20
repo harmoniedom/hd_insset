@@ -1,17 +1,14 @@
-@import (css) "Hd_Insset_Admin.css";
+@import "Hd_Insset_Admin.css";
 
 .notice-info {
   display: none;
 }
-
 .hd_grid_disable_row {
-  background-color: rgb(211, 211, 211) !important;
+  background-color: #d3d3d3 !important;
   opacity: 0.4 !important;
   pointer-events: none !important;
   user-select: none !important;
 }
-
 #hd_pays_multiselect {
   height: 300px !important;
 }
-

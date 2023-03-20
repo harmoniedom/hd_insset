@@ -44,13 +44,13 @@ jQuery(document).ready(function ()
 
   // boucle for pour passer de du pays selectionné 1 au pays sélectioné 4
   for (let i = 1; i < 4; i++) {
-    jQuery('#hd_insset_pays_selectionnes' + i).change(() => {
+    jQuery('#hd_insset_pays' + i).change(() => {
       jQuery('#hd_insset_pays' + (i + 1) + "_container").removeClass(
         "disable-select-pays"
       );
-      //enable button lorsque le premier pays est selectionné
+      //bouton pays 1/2/3/4
       if (i == 1)
-        jQuery('#hd_insset_pays_selectionnes').removeClass(
+        jQuery('#hd_insset_pays_selectionnes-submit').removeClass(
           "disable-select-pays"
         );
     });
@@ -69,26 +69,16 @@ jQuery(document).ready(function ()
         let id = jQuery(this).attr("id");
         if (typeof id !== "undefined") formData.append(id, jQuery(this).val());
       });
-
-      console.log(formData);
+    
 
     jQuery('#hd-loading-container').show();
 
-    const context = {
-      nom: ListePays[0][0],
-      prenom: ListePays[1][0],
-      sexe: ListePays[2][0] == "Homme" ? "Mr" : "Mme",
-      url: choix_voyage_url,
-    };
-
-    const source = jQuery("#hd-form-final").attr(
-      "src"
-    );
+ 
 
     jQuery.ajax(
       {
-      url: hd_insset_script.ajax_url,
-      xhrFields: 
+        url: hd_insset_script.ajax_url,
+        xhrFields: 
       {
         withCredentials: true,
       },
@@ -97,20 +87,69 @@ jQuery(document).ready(function ()
       processData: false,
       data: formData,
       type: "post",
-      url: source,
-      success: function (rs, textStatus, jqXHR,source) {
-        jQuery("#hd-form-final").html(template(context));
+      success: function (rs, textStatus, jqXHR) {
+        
+          window.sessionStorage.setItem("Authorisation", "step1,step2,step3");
+          window.location.replace("http://localhost/wordpress/2023/03/01/final/");
+           
+           return false;
+    },
+  });
+  });
+
+// //Ajax du formulaire final
+const url = window.location.pathname;
+
+ if (url.startsWith("/wordpress/2023/03/01/final/"))
+ {
+  var userid = 1;
+  console.log(userid);
+
+  let formData = new FormData();
+    formData.append("action", "hd_inssetJson");
+    formData.append("security", hd_insset_script.security);
+    formData.append("id",userid)
+
+    jQuery.ajax(
+      {
+        url: hd_insset_script.ajax_url,
+        xhrFields: 
+      {
+        withCredentials: true,
       },
-    });
-       
-        jQuery("#hd-form-final").addClass("show-modal-box");
+      cache: false,
+      contentType: false,
+      processData: false,
+      data: formData,
+      type: "post",
+      success: function (rs) 
+      {
+        formData.append("json",rs);
 
-      //aller à la page suivante 
-      window.sessionStorage.setItem("Authorisation", "step1,step2,step3");
-      window.location.replace("http://localhost/wordpress/2023/03/01/final/");
-     
-          return false;
-       
-        });
-      });
+        let hbs = jQuery('#Script_Modal').attr('src');
 
+        jQuery.ajax(
+          {
+            dataType: "html",
+            url: hbs,
+
+            success: function(source)
+            {
+              var modal = Handlebars.compile(source);
+              jQuery("#handlebarsModalBox").html(modal(JSON.parse(rs)));
+           
+
+              jQuery('#hd-form-final').on('click', function(e){
+                document.getElementById('handlebarsModalBox').style.display = "block";
+            });
+
+            jQuery('#handlebars_submit').on('click', function(e){
+              window.sessionStorage.setItem('json', rs);
+              window.location.replace("http://localhost/wordpress/2023/02/16/hd_insset/");
+          });
+            } 
+      })     
+    },
+  });
+ }
+});

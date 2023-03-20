@@ -23,8 +23,9 @@ class Hd_Insset_Shortcode_Form_selection
         //fomulaire en html pour sélectionner les pays
         return "<form id='hd_insset_pays_selectionnes'>
             
-        <h3>Voici vos Pays que vous venez de sélectionner</h3>
+        <h3>Liste des pays</h3>
         
+        // formulaire pour selectionner pays 1
         <div>
             <label >Selectionné votre pays</label>
             <select name='pays1' id='hd_insset_pays1' required='required'  style='display: block;'>
@@ -32,6 +33,7 @@ class Hd_Insset_Shortcode_Form_selection
             </select>
         </div>
 
+        // formulaire pour selectionner pays 2
         <div class='disable-select-pays' id='pays2_container'>
             <label >Selectionné votre pays</label>
             <select name='pays2' id='hd_insset_pays2'  style='display: block;'>
@@ -39,6 +41,7 @@ class Hd_Insset_Shortcode_Form_selection
             </select>
         </div>
 
+        // formulaire pour selectionner pays 3
         <div class='disable-select-pays' id='pays3_container'>
             <label>Selectionné votre pays</label>
             <select name='pays3' id='hd_insset_pays3'  style='display: block;'>
@@ -46,6 +49,7 @@ class Hd_Insset_Shortcode_Form_selection
             </select>
         </div>
 
+        // formulaire pour selectionner pays 4
         <div class='disable-select-pays' id='pays4_container'>
             <label> Selectionné votre pays</label>
             <select name='pays4' id='hd_insset_pays4'  style='display: block;'>
@@ -54,7 +58,7 @@ class Hd_Insset_Shortcode_Form_selection
         </div>
 
         
-            <button class='disable-select-pays' id='hd_insset_pays_selectionnes-subimit'>Je valide mes choix</button>
+            <button class='disable-select-pays' id='hd_insset_pays_selectionnes-submit'>Je valide mes choix</button>
         </form>";
         
 

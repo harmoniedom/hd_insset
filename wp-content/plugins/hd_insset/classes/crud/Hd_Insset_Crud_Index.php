@@ -162,4 +162,16 @@ class Hd_Insset_Crud_Index
     return array( $paysId, $ProspectId);
     }
 
+    public function result($element_souhaiter, $table, $params = 1)
+    {
+        
+        global $wpdb;
+        
+        $sql = "SELECT ".$element_souhaiter." FROM `". $table ."` WHERE ".$params;
+        $result = $wpdb->get_results($sql,'ARRAY_A');
+
+        return $result;
+
+    }
+
 }

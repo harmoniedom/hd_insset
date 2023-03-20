@@ -3,7 +3,7 @@
 class Hd_Insset_Helper
 {
 
-    public function conversion_pays($id_conversion_pays)
+    public function conversion_pays($id_conversion_pays) // récupération de l'id du pays de la page de données et afficher le nom du pays qui correspond
     {
         if(!$id_conversion_pays)
         {

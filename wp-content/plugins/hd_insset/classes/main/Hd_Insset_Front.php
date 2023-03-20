@@ -1,31 +1,32 @@
 <?php
 
-class Hd_Insset_Front {
+class Hd_Insset_Front 
+{
   
-        public function __construct()
-        {
-            add_action('wp_enqueue_scripts', array($this, 'addjs'), 0);
+    public function __construct()
+    {
+        add_action('wp_enqueue_scripts', array($this, 'addjs'), 0);
     
-            return;
-        }
-    
-        //fonction ajouter js créer au dessus
-        public function addjs()
-        {
-            
-            wp_register_script('hd_inssetF', plugins_url(Hd_Insset_PLUGIN_NAME . '/assets/js/Hd_Insset_Front.js'), array('jquery-new'), Hd_Insset_VERSION, true);
-            wp_enqueue_script('hd_inssetF');
-            wp_localize_script(
-                'hd_inssetF',
-                'hd_insset_script',
-                array(
-                    'ajax_url' => admin_url('admin-ajax.php'),
-                    'security' => wp_create_nonce('ajax_nonce_security')
-                )
-            );
-            wp_enqueue_style ('admin-front', plugins_url(Hd_Insset_PLUGIN_NAME .'/assets/css/Hd_Insset_Admin.css'));
-            wp_enqueue_script('hd-form-final', plugins_url(Hd_Insset_PLUGIN_NAME) . '/assets/handlebars/Hd_Insset_Handlebars.hbs', array(), Hd_Insset_VERSION, true);
-          
-            return;
-        }
+        return;
     }
+    
+    //fonction ajouter js créer au dessus
+    public function addjs()
+    {
+            
+        wp_register_script('hd_inssetF', plugins_url(Hd_Insset_PLUGIN_NAME . '/assets/js/Hd_Insset_Front.js'), array('jquery-new'), Hd_Insset_VERSION, true);
+        wp_enqueue_script('hd_inssetF');
+        wp_localize_script(
+            'hd_inssetF',
+            'hd_insset_script',
+
+            array(
+                'ajax_url' => admin_url('admin-ajax.php'),
+                'security' => wp_create_nonce('ajax_nonce_security')
+                 )
+        );
+        wp_enqueue_style ('admin-front', plugins_url(Hd_Insset_PLUGIN_NAME .'/assets/css/Hd_Insset_Front.css'));
+            
+          return;
+    }
+}

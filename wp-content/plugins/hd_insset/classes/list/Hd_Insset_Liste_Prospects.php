@@ -1,11 +1,13 @@
 <?php
 
-if (!class_exists('WP_List_Table')) {
+if (!class_exists('WP_List_Table')) 
+{
     require_once(ABSPATH . 'wp-admin/includes/screen.php');
     require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
 }
 
-class Hd_Insset_Liste_Prospects extends WP_List_Table {
+class Hd_Insset_Liste_Prospects extends WP_List_Table 
+{
 
     public $_screen;
 
@@ -37,14 +39,13 @@ class Hd_Insset_Liste_Prospects extends WP_List_Table {
             'per_page'    => $perPage
         ));
 
-       // $data = array_slice($data, (($currentPage - 1) * $perPage), $perPage);
 
         $this->items = $data;
     }
 
-    public function get_columns($columns = array())
+    public function get_columns($columns = array())// affichage des deux colonnes lors du regroupement
     {
-        $columns['prospects'] = __('Utilisateur');
+        $columns['prospects'] = __('Utilisateur'); 
         $columns['pays'] = __('Nombre de pays selectionné');
 
         return $columns;
@@ -67,7 +68,8 @@ class Hd_Insset_Liste_Prospects extends WP_List_Table {
 
         $sql = "SELECT COUNT( * ) as 'numero_pays', wp_hd_insset_prospects.* FROM wp_hd_insset_pays INNER JOIN wp_hd_insset_prospects on wp_hd_insset_pays.id_prospects = wp_hd_insset_prospects.id GROUP BY wp_hd_insset_prospects.id ";
         
-        if (!empty($_REQUEST['orderby'])) {
+        if (!empty($_REQUEST['orderby'])) 
+        {
             $sql .= ' ORDER BY `' . esc_sql($_REQUEST['orderby']) . '`';
             $sql .= !empty($_REQUEST['order']) ? ' ' . esc_sql($_REQUEST['order']) : ' ASC';
         }
@@ -77,7 +79,7 @@ class Hd_Insset_Liste_Prospects extends WP_List_Table {
         return $result;
     }
 
-    public function column_default($item, $column_name)
+    public function column_default($item, $column_name) //affichage dans la barre de recherche
     {
         if (preg_match('/prospects/i', $column_name))
             return self::getProspects($item['sexe'], $item['nom'], $item['prenom']);
@@ -88,7 +90,7 @@ class Hd_Insset_Liste_Prospects extends WP_List_Table {
         return @$item[$column_name];
     }
 
-    private function getPays($numero_pays = 0)
+    private function getPays($numero_pays = 0) // retourne le numéro du pays qui correspond
     {
         if (!$numero_pays)
             return;
@@ -96,7 +98,7 @@ class Hd_Insset_Liste_Prospects extends WP_List_Table {
         print("$numero_pays");
     }
 
-    private function getProspects($sexe = "", $nom = "", $prenom = "")
+    private function getProspects($sexe = "", $nom = "", $prenom = "") // affichage du nom prenom sexe du prospects
     {
         if (!$sexe && !$nom && !$prenom)
             return;

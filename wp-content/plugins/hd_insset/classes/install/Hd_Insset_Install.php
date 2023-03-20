@@ -25,9 +25,9 @@ class Hd_Insset_Install
         $table_name_pays = $wpdb->prefix . 'hd_insset_pays';
 
         if ($this->isTableBaseAlreadyCreated($table_name_config, $table_name_prospects, $table_name_pays))
-            {    
-                return;
-            }
+        {    
+            return;
+        }
 
         $sql_create_hd_insset_config = "CREATE TABLE IF NOT EXISTS $table_name_config (
 	     `id` mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -67,13 +67,10 @@ class Hd_Insset_Install
                 return;
             }
 
-         }
+        }
     }
     
-          
-
-
-        
+            
     public function isTableBaseAlreadyCreated($table_name_config, $table_name_prospects, $table_name_pays)
     {
         global $wpdb;
@@ -85,7 +82,7 @@ class Hd_Insset_Install
       return $wpdb->get_var($sql_Config) && $wpdb->get_var($sql_Prospects) && $wpdb->get_var($sql_Pays);
     } 
    
-        public function creerPays($table_name_config)
+    public function creerPays($table_name_config)
         {
             global $wpdb;
 
@@ -341,10 +338,12 @@ class Hd_Insset_Install
                 'ZWE'=>'Zimbabwe'
             );
             
-            foreach ($iso_array as $iso=> $pays) {
-                $wpdb->insert($table_name_config, array('iso' => $iso, 'pays' => $pays, 'note' => '3', 'accessible' => 0, 'actif' => 1));
+            foreach ($iso_array as $iso=> $pays) 
+            {
+                $wpdb->insert($table_name_config, array('iso' => $iso, 'pays' => $pays, 'note' => '0', 'accessible' => 0, 'actif' => 1));
             }
-
-    }
+        }
+    
 }
+
 

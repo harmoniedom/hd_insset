@@ -13,10 +13,10 @@ class Hd_Insset_Shortcode_Form_inscription
         
         //récupèrer la valeur du résultat grace au crud pour le mettre dans la variable Liste Pays
         $id_prospects = '1';
-        $ListePays = $Hd_Insset_Crud_Index->getConfig();
+        $ListePays = $Hd_Insset_Crud_Index->getConfig();//création de la table config
 
 
-         // regarder si l'utilisateur a déja des choix de pays
+         // utilisateur a choisit ou pas des pays avant
          if (sizeof($ListePays) != 0) 
          {
             $paysDonnee = "[['pays'],";
@@ -50,7 +50,7 @@ class Hd_Insset_Shortcode_Form_inscription
             <h1>Vos pays choisit : </h1>
             <div class='map-container'>
                 <div id='hd-pays-map' style='width: 900px; height: 500px;'></div>
-                <button id='reinitialisation-boutton'>Réinitialiser mes choix </button>
+                //<button id='reinitialisation-boutton'>Réinitialiser mes choix </button>
             </div>
         ";
     }

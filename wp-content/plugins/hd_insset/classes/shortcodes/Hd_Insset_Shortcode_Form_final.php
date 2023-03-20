@@ -25,6 +25,10 @@ class Hd_Insset_Shortcode_Form_final
         endforeach;
 
         return "
+
+        <script src=\"https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js\"></script>
+        <script id=\"Script_Modal\" type=\"text/x-handlebars-template\" src=\"".plugins_url(Hd_Insset_PLUGIN_NAME."/assets/Handlebars/Handlebars.hbs")."\"></script>
+
             nom = " .$ListePays[1][0]["nom"]. ",<br>
             prenom = " .$ListePays[1][0]["prenom"].",<br>
             sexe= " .$ListePays[1][0]["sexe"].",<br>
@@ -35,8 +39,9 @@ class Hd_Insset_Shortcode_Form_final
             <ul class='hd_pays_list_container'>
             " . $paysHTML. "
             </ul>
-            <button id='hd-form-final'>Oui, je suis d'accord</button>
+            <input type=\"button\" id=\"hd-form-final\" value=\"Oui,je suis d'accord\"></input>
             <div id='handlebarsModalBox'></div>
+
             ";
     }
 }

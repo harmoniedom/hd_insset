@@ -1,9 +1,10 @@
 <?php
 
-class Hd_Insset_Admin {
+class Hd_Insset_Admin 
+{
 
     public function __construct()
- {
+    {
         add_action('admin_menu', array($this, 'menu'), -1);
         return;
     }
@@ -47,8 +48,7 @@ class Hd_Insset_Admin {
         );
        
 
-add_action('admin_enqueue_scripts', array($this, 'assets'), 999);
-       
+    add_action('admin_enqueue_scripts', array($this, 'assets'), 999);   
     }
 
     
@@ -61,20 +61,20 @@ add_action('admin_enqueue_scripts', array($this, 'assets'), 999);
     {
 
         $Hd_Insset_Views_Liste_Pays = new Hd_Insset_Views_Liste_Pays();
-        return $Hd_Insset_Views_Liste_Pays->display();
+        return $Hd_Insset_Views_Liste_Pays->display(); //création de la page Liste Pays sur wordpress
 
     }
 
     public function Hd_Insset_Config()
     {
         $Hd_Insset_Views_Config = new Hd_Insset_Views_Config();
-        return $Hd_Insset_Views_Config->display();
+        return $Hd_Insset_Views_Config->display();//création de la page Config sur wordpress
     }
 
     public function Hd_Insset_Liste_Prospects()
     {
         $Hd_Insset_Views_Liste_Prospects = new Hd_Insset_Views_Liste_Prospects();
-        return $Hd_Insset_Views_Liste_Prospects->display();
+        return $Hd_Insset_Views_Liste_Prospects->display();//création de la page Liste Prospect sur wordpress
     }
 
     public function assets(){

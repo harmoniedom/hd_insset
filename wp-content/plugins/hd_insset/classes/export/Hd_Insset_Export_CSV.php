@@ -6,7 +6,8 @@ $path= __DIR__;
 preg_match('/(.*)wp\-content/i', $path, $dir);
 require_once(end($dir) .'wp-load.php');
 
-function trimming(string $val):string {
+function trimming(string $val):string 
+{
     return trim($val);
 
 };

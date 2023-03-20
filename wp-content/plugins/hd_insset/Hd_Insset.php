@@ -16,13 +16,16 @@ remove_action('wp_head', 'wp_generator');
 if (!defined('ABSPATH'))
     exit;
 
-define('Hd_Insset_VERSION', '1.3.16');
+define('Hd_Insset_VERSION', '1.4.2');
 define('Hd_Insset_FILE',__FILE__);
 define('Hd_Insset_DIR', dirname(Hd_Insset_FILE));
 define('Hd_Insset_BASENAME', pathinfo((Hd_Insset_FILE))['filename']);
 define('Hd_Insset_PLUGIN_NAME', Hd_Insset_BASENAME);
+// page inscription
 define('Hd_Insset_Url_1', '/choix-voyage');
+//page choix des pays
 define('Hd_Insset_Url_2', '/hd_insset');
+// page récap
 define('Hd_Insset_Url_3', '/final');
 
 

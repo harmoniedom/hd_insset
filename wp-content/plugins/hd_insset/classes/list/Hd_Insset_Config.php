@@ -1,11 +1,13 @@
 <?php
 
-if (!class_exists('WP_List_Table')) {
+if (!class_exists('WP_List_Table')) 
+{
     require_once(ABSPATH .'wp-admin/includes/screen.php');
     require_once(ABSPATH .'wp-admin/includes/class-wp-list-table.php');
 }
 
-class Hd_Insset_Config extends WP_List_Table {
+class Hd_Insset_Config extends WP_List_Table 
+{
 
     public $_screen;
 
@@ -46,7 +48,8 @@ class Hd_Insset_Config extends WP_List_Table {
 
     }
 
-    public function get_columns($columns = array()) {
+    public function get_columns($columns = array()) 
+    {
 
         // $columns['iso'] = __('iso');
         // $columns['pays'] = __('pays');
@@ -72,36 +75,39 @@ class Hd_Insset_Config extends WP_List_Table {
            
             return $columns;
         
-        }
+    }
     
   
-    public function get_hidden_columns($default = array()) {
+    public function get_hidden_columns($default = array()) 
+    {
 
         return $default;
 
     }
 
-    public function get_sortable_columns($sortable = array()) {
-    global $wpdb;
-   $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME =N'hd_insset_config'";
+    public function get_sortable_columns($sortable = array()) 
+    {
+        global $wpdb;
+        $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME =N'hd_insset_config'";
    
-   $result = $wpdb->get_results($sql, 'ARRAY_A');
+        $result = $wpdb->get_results($sql, 'ARRAY_A');
 
 
 
-    foreach ($result as $value)
-    $sortable[$value["COLUMN_NAME"]] = array($value["COLUMN_NAME"], true);
+        foreach ($result as $value)
+             $sortable[$value["COLUMN_NAME"]] = array($value["COLUMN_NAME"], true);
     
-    // $sortable["iso"] = array('iso', true);
-    // $sortable["pays"] = array('pays', true);
-    // $sortable["note"] = array('note', true);
-    // $sortable["accessible"] = array('accessible', true);
-    // $sortable["actif"] = array('actif', true);
-    return $sortable;
+            // $sortable["iso"] = array('iso', true);
+            // $sortable["pays"] = array('pays', true);
+            // $sortable["note"] = array('note', true);
+            // $sortable["accessible"] = array('accessible', true);
+            // $sortable["actif"] = array('actif', true);
+        return $sortable;
 
     }
 
-    public function table_data($per_page=10, $page_number=1, $orderbydefault=false) {
+    public function table_data($per_page=10, $page_number=1, $orderbydefault=false) 
+    {
 
         global $wpdb;
 
@@ -121,7 +127,8 @@ class Hd_Insset_Config extends WP_List_Table {
 
     }
 
-    public function column_default( $item, $column_name ) {
+    public function column_default( $item, $column_name ) // affichage dans la barre de recherche
+    { 
 
         
          if (preg_match('/accessible/i', $column_name))
@@ -134,7 +141,7 @@ class Hd_Insset_Config extends WP_List_Table {
 
     }
 
-    private function getNote($id = 0)
+    private function getNote($id = 0) // affiche note de 0 à 5
     {
     
         if (!$id)
@@ -154,20 +161,21 @@ class Hd_Insset_Config extends WP_List_Table {
         );
     }
 
-    private function getAccessible($id = 0, $accessible = 0)
+    private function getAccessible($id = 0, $accessible = 0)// affichage accessible ou non pour majeur
     {
 
         if (!$id)
         return;
 
     return  sprintf(
-        '<input type="checkbox" class="acessible_checkBox" name="accessible" data-id="%s">',
+        '<input type="checkbox" class="acessible_checkBox" name="accessible" data-id="%s">', 
       
             $id,
             __('accessible')
         );
     }
-    // ajoue d'un style pour les pays indisponible 
+    
+    //ligne grisée si non accessible
     public function single_row($item)
     {
         $cssClass = ($item['actif'] == 1) ? '' : 'hd_grid_disable_row';

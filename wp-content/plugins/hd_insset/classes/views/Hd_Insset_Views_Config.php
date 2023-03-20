@@ -7,7 +7,7 @@ class Hd_Insset_Views_Config
         //$Hd_Insset_Crud_Index = new Hd_Insset_Crud_Index();
         $WP_INSSET_Config = new Hd_Insset_Config();
 
-        $Config = Hd_Insset_Crud_Index::getConfig();
+        $Config = Hd_Insset_Crud_Index::getConfig(); //création de la table config
 
         $tempscreen = get_current_screen();
         $this->_screen = $tempscreen->base;
@@ -43,7 +43,7 @@ class Hd_Insset_Views_Config
                                 </select>
 
                         <span class="helper-text">
-                            Les pays selectionnés sont indisponibles
+                            Les pays selectionnés sont inactifs
                         </span>
 
                     </form>
